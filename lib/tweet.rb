@@ -4,7 +4,7 @@ require 'activesupport'
 require 'rest_client'
 
 module Tweet
-  CONFIG_FILE = ENV['HOME']+'/.tweet'
+  CONFIG_FILE = ENV['HOME'] + '/.tweet'
   
   class << self
     attr_accessor :username, :password
@@ -13,6 +13,7 @@ module Tweet
       get_credentials!
       resource = RestClient::Resource.new 'http://twitter.com/statuses/update.xml', username, password
       resource.post(:status => status, :source => 'tweetgem', :content_type => 'application/xml', :accept => 'application/xml')
+      puts "Tweeted successfully... (#{username}: #{status})"
     end
     
     def get_credentials!
